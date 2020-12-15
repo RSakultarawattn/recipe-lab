@@ -104,4 +104,21 @@ describe('recipe-lab routes', () => {
         });
       });
   });
+  it('removes a recipe using DELETE', async() => {
+    const recipe = await Recipe.insert({
+      name: 'moonshine',
+      directions: [
+        'make',
+        'some',
+        'shine',
+        'yo'
+      ],
+    });
+    return request(app)
+      .delete(`/api/v1/recipes/${recipe.id}`)
+      .then(res => {
+        expect(res.body).toEqual(recipe);
+      });
+  });
+
 });
