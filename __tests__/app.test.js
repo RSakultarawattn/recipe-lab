@@ -61,7 +61,7 @@ describe('recipe-lab routes', () => {
     ].map(recipe => Recipe.insert(recipe)));
 
     return request(app)
-      .get('/api/v1/recipes')
+      .get('/api/v1/recipes/')
       .then(res => {
         recipes.forEach(recipe => {
           expect(res.body).toContainEqual(recipe);
