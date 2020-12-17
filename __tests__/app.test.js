@@ -55,7 +55,7 @@ describe('recipe-lab routes', () => {
         });
       });
   });
-  it.only('finds a recipe by id via GET', async() => {
+  it('finds a recipe by id via GET', async() => {
     const recipe = await Recipe.insert({ 
       name: 'moonshine',
       directions: [
@@ -99,7 +99,7 @@ describe('recipe-lab routes', () => {
       });
   });
     
-  it('gets all recipes', async() => {
+  it.only('gets all recipes', async() => {
     const recipes = await Promise.all([
       { name: 'moonshine', directions: [], ingredients: [] },
       { name: 'pizza', directions: [], ingredients: [] },
