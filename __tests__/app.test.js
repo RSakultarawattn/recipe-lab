@@ -115,7 +115,7 @@ describe('recipe-lab routes', () => {
       });
   });
 
-  it.only('updates a recipe by id', async() => {
+  it('updates a recipe by id', async() => {
     const recipe = await Recipe.insert({
       name: 'moonshine',
       directions: [
@@ -180,6 +180,7 @@ describe('recipe-lab routes', () => {
       directions: [
         'make',
         'some',
+        'freaking',
         'shine',
         'yo'
       ],
