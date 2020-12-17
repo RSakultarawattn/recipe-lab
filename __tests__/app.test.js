@@ -13,51 +13,96 @@ describe('recipe-lab routes', () => {
     return pool.end();
   });
 
-  it('creates a recipe', () => {
+  it.only('creates a recipe', () => {
     return request(app)
       .post('/api/v1/recipes')
       .send({
-        name: 'cookies',
+        name: 'moonshine',
         directions: [
-          'preheat oven to 375',
-          'mix ingredients',
-          'put dough on cookie sheet',
-          'bake for 10 minutes'
+          'make',
+          'some',
+          'freaking',
+          'shine',
+          'yo'
+        ],
+        ingredients: [
+          {
+            name: 'corn',
+            measurement: 'ears',
+            amount: 10
+          }
         ]
       })
       .then(res => {
         expect(res.body).toEqual({
           id: expect.any(String),
-          name: 'cookies',
+          name: 'moonshine',
           directions: [
-            'preheat oven to 375',
-            'mix ingredients',
-            'put dough on cookie sheet',
-            'bake for 10 minutes'
+            'make',
+            'some',
+            'freaking',
+            'shine',
+            'yo'
+          ],
+          ingredients: [
+            {
+              name: 'corn',
+              measurement: 'ears',
+              amount: 10
+            }
           ]
         });
       });
   });
   it('finds a recipe by id via GET', async() => {
-    const recipe = await Recipe.insert({ name: 'muffins', 
-      directions: 
-    ['make',
-      'the',
-      'freaking',
-      'things']
+    const recipe = await Recipe.insert({ 
+      name: 'moonshine',
+      directions: [
+        'make',
+        'some',
+        'freaking',
+        'shine',
+        'yo'
+      ],
+      ingredients: [
+        {
+          name: 'corn',
+          measurement: 'ears',
+          amount: 10
+        }
+      ]
     });
     
-    const response = await request(app)
-      .get(`/api/v1/recipes/${recipe.id}`);
-    
-    expect(response.body).toEqual(recipe);
+    return request(app)
+      .get(`/api/v1/recipes/${recipe.id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          id: expect.any(String),
+          name: 'moonshine',
+          directions: [
+            'make',
+            'some',
+            'freaking',
+            'shine',
+            'yo'
+          ],
+          ingredients: [
+            {
+              name: 'corn',
+              measurement: 'ears',
+              amount: 10
+            }
+          ]
+
+        });
+      });
   });
     
   it('gets all recipes', async() => {
     const recipes = await Promise.all([
-      { name: 'cookies', directions: [] },
-      { name: 'cake', directions: [] },
-      { name: 'pie', directions: [] }
+      { name: 'moonshine', directions: [], ingredients: [] },
+      { name: 'pizza', directions: [], ingredients: [] },
+      { name: 'beer', directions: [], ingredients: [] }
     ].map(recipe => Recipe.insert(recipe)));
 
     return request(app)
@@ -71,35 +116,59 @@ describe('recipe-lab routes', () => {
 
   it('updates a recipe by id', async() => {
     const recipe = await Recipe.insert({
-      name: 'cookies',
+      name: 'moonshine',
       directions: [
-        'preheat oven to 375',
-        'mix ingredients',
-        'put dough on cookie sheet',
-        'bake for 10 minutes'
+        'make',
+        'some',
+        'freaking',
+        'shine',
+        'yo'
       ],
+      ingredients: [
+        {
+          name: 'corn',
+          measurement: 'ears',
+          amount: 10
+        }
+      ]
     });
 
     return request(app)
       .put(`/api/v1/recipes/${recipe.id}`)
       .send({
-        name: 'good cookies',
+        name: 'great moonshine',
         directions: [
-          'preheat oven to 375',
-          'mix ingredients',
-          'put dough on cookie sheet',
-          'bake for 10 minutes'
+          'make',
+          'some',
+          'freaking',
+          'shine',
+          'yo yo'
+        ],
+        ingredients: [
+          {
+            name: 'corn',
+            measurement: 'ears',
+            amount: 15
+          }
         ]
       })
       .then(res => {
         expect(res.body).toEqual({
           id: expect.any(String),
-          name: 'good cookies',
+          name: 'great moonshine',
           directions: [
-            'preheat oven to 375',
-            'mix ingredients',
-            'put dough on cookie sheet',
-            'bake for 10 minutes'
+            'make',
+            'some',
+            'freaking',
+            'shine',
+            'yo yo'
+          ],
+          ingredients: [
+            {
+              name: 'corn',
+              measurement: 'ears',
+              amount: 15
+            }
           ]
         });
       });
@@ -113,11 +182,36 @@ describe('recipe-lab routes', () => {
         'shine',
         'yo'
       ],
+      ingredients: [
+        {
+          name: 'corn',
+          measurement: 'ears',
+          amount: 10
+        }
+      ]
     });
     return request(app)
       .delete(`/api/v1/recipes/${recipe.id}`)
       .then(res => {
-        expect(res.body).toEqual(recipe);
+        expect(res.body).toEqual({
+          id: expect.any(String),
+          name: 'moonshine',
+          directions: [
+            'make',
+            'some',
+            'freaking',
+            'shine',
+            'yo'
+          ],
+          ingredients: [
+            {
+              name: 'corn',
+              measurement: 'ears',
+              amount: 10
+            }
+          ]
+
+        });
       });
   });
 
