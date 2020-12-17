@@ -14,7 +14,7 @@ describe('recipe-lab routes', () => {
     return pool.end();
   });
 
-  it.only('creates a recipe', () => {
+  it('creates a recipe', () => {
     return request(app)
       .post('/api/v1/recipes')
       .send({
@@ -55,7 +55,7 @@ describe('recipe-lab routes', () => {
         });
       });
   });
-  it('finds a recipe by id via GET', async() => {
+  it.only('finds a recipe by id via GET', async() => {
     const recipe = await Recipe.insert({ 
       name: 'moonshine',
       directions: [
