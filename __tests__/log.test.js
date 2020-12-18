@@ -14,7 +14,7 @@ describe('log routes', () => {
     return pool.end();
   });
 
-  it('creates a log', async() => {
+  it.only('creates a log', async() => {
     const recipe = await Recipe.insert({
       name: 'moonshine',
       directions: [
@@ -32,6 +32,7 @@ describe('log routes', () => {
         }
       ]
     });
+    
     return request(app)
       .post('/api/v1/logs')
       .send({
@@ -46,7 +47,7 @@ describe('log routes', () => {
           dateOfEvent: expect.any(String), 
           notes: 'yep, some notes and stuff', 
           rating: 8,
-          recipe_id: recipe.id
+          recipeId: recipe.id
         });
       });
   });
