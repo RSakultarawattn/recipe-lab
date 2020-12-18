@@ -51,7 +51,7 @@ describe('log routes', () => {
         });
       });
   });
-  it.only('finds a log by id via GET', async() => {
+  it('finds a log by id via GET', async() => {
     const recipe = await Recipe.insert({ 
       name: 'moonshine', 
       directions: 
@@ -92,7 +92,7 @@ describe('log routes', () => {
     
   });
     
-  it('gets all logs', async() => {
+  it.only('gets all logs', async() => {
     const recipe = await Recipe.insert({
       name: 'moonshine',
       directions: [
