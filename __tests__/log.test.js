@@ -14,7 +14,7 @@ describe('log routes', () => {
     return pool.end();
   });
 
-  it.only('creates a log', async() => {
+  it('creates a log', async() => {
     const recipe = await Recipe.insert({
       name: 'moonshine',
       directions: [
@@ -51,7 +51,7 @@ describe('log routes', () => {
         });
       });
   });
-  it('finds a log by id via GET', async() => {
+  it.only('finds a log by id via GET', async() => {
     const recipe = await Recipe.insert({ 
       name: 'moonshine', 
       directions: 
