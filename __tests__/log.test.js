@@ -14,7 +14,7 @@ describe('log routes', () => {
     return pool.end();
   });
 
-  it.only('creates a log', async() => {
+  it('creates a log', async() => {
     const recipe = await Recipe.insert({
       name: 'moonshine',
       directions: [
@@ -92,7 +92,7 @@ describe('log routes', () => {
     
   });
     
-  it('gets all logs', async() => {
+  it.only('gets all logs', async() => {
     const recipe = await Recipe.insert({
       name: 'moonshine',
       directions: [
