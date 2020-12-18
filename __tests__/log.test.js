@@ -128,7 +128,7 @@ describe('log routes', () => {
       });
   });
 
-  it.only('updates a log by id', async() => {
+  it('updates a log by id', async() => {
     const recipe = await Recipe.insert({
       name: 'moonshine',
       directions: [
